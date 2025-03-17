@@ -1,6 +1,14 @@
 spring:
   application:
   name: robot-agent
+  datasource:
+    url: jdbc:sqlite:robot.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 server:
   port: 8081
