@@ -36,4 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 /robot.db
-/RobotManager_*
+/RobotAgent_*
+/my-robot-agent.tar
