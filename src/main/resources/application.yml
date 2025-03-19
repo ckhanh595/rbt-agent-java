@@ -31,6 +31,7 @@ mqtt:
 ros2:
   publishers: /turtle1/cmd_vel, /robot/telemetry
   subscribers: /turtle1/pose, /robot/commands
+  use_turtlesim: true
 
 ---
 # Local development profile

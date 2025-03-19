@@ -18,7 +18,7 @@ public class MqttRos2BridgeService {
 
     private final MqttService mqttService;
 
-    private final TurtlesimService turtlesimService;
+    private final PatrolService patrolService;
 
     private final ObjectMapper objectMapper;
 
@@ -31,7 +31,7 @@ public class MqttRos2BridgeService {
 
             try {
                 var robotCommand = objectMapper.readValue(payload, RobotCommand.class);
-                turtlesimService.processCommand(robotCommand);
+                patrolService.startPatrol(robotCommand.command());
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
