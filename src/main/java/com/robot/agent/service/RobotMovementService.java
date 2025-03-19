@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robot.agent.model.RobotCommand;
 import com.robot.agent.model.StatusMessage;
 import id.jros2client.JRos2Client;
+import id.jros2messages.sensor_msgs.JointStateMessage;
 import id.jrosclient.TopicSubmissionPublisher;
 import id.jrosclient.TopicSubscriber;
-import id.jrosmessages.geometry_msgs.PoseMessage;
 import id.jrosmessages.geometry_msgs.TwistMessage;
 import id.jrosmessages.geometry_msgs.Vector3Message;
 import jakarta.annotation.PostConstruct;
@@ -132,17 +132,18 @@ public class RobotMovementService {
     }
 
     @PostConstruct
-    private void subscribeToTurlesim() {
+    private void subscribeToRobotPose() {
         log.info("Subscribing to topic: {}", GAZEBO_POSE_TOPIC);
 
-        var postTopic = useTurtlesim? TURTLESIM_POSE_TOPIC : GAZEBO_POSE_TOPIC;
+//        var postTopic = useTurtlesim? TURTLESIM_POSE_TOPIC : GAZEBO_POSE_TOPIC;
+        var postTopic = "/joint_states";
 
         try {
             ros2Client.subscribe(
-                    new TopicSubscriber<>(PoseMessage.class, postTopic) {
+                    new TopicSubscriber<>(JointStateMessage.class, postTopic) {
                         @Override
-                        public void onNext(PoseMessage item) {
-                            log.info("TurtleSim pose: {}", item);
+                        public void onNext(JointStateMessage item) {
+                            log.info("JointStateMessage pose: {}", item);
 
                             var subscription = getSubscription();
                             subscription.map(sub -> {

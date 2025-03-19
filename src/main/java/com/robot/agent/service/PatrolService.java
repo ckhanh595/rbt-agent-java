@@ -32,14 +32,15 @@ public class PatrolService {
                 // Turn right
                 robotService.processCommand(new RobotCommand("move", 0.0, -0.5));
                 break;
-            case "move-forward":
+            case "stop":
                 // Move forward
-                robotService.processCommand(new RobotCommand("move", 0.2, 0.0));
+                robotService.processCommand(new RobotCommand("stop", 0.0, 0.0));
                 break;
             case "left":
                 // Turn left
                 robotService.processCommand(new RobotCommand("move", 0.0, 0.5));
                 break;
+
         }
     }
 
